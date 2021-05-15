@@ -13,10 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
-from environs import Env
+from decouple import config
 
-env = Env()
-env.read_env()
 
 
 
@@ -29,10 +27,11 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qf7594g^$-bdeb8ek@#bo$-07a!%1m_spqscu@9xe-vsp)3-^6'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',default=False,cast=bool)
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -92,8 +91,15 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config('DATABASE_ENGINE'),
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
+        'TEST': {
+            'NAME': config('DATABASE_NAME'),
+        },
     }
 }
 
