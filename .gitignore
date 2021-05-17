@@ -1,3 +1,6 @@
+#editor/local config
+dev_settings.py
+.vscode/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
