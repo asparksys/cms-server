@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from member.models import MemberRole, Member
+
+from member.models import Member
+from member.models import MemberRole
 
 
 class MemberRoleSerializer(serializers.ModelSerializer):
