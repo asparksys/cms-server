@@ -6,8 +6,12 @@ from club.models import BranchClub
 
 class BaseModel(models.Model):
     date = models.DateField(auto_now_add=True)
-    added_by = models.ForeignKey(User,  null=True,blank=True,on_delete=models.CASCADE, default=None)
-    club_id = models.ForeignKey(BranchClub, null=True,blank=True, on_delete=models.CASCADE, default=None)
+    added_by = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.CASCADE, default=None
+    )
+    club_id = models.ForeignKey(
+        BranchClub, null=True, blank=True, on_delete=models.CASCADE, default=None
+    )
 
     class Meta:
         abstract = True
@@ -48,7 +52,7 @@ class Member(BaseModel, models.Model):
     dob = models.DateField()
     education = models.CharField(max_length=255, choices=EDUCATION_LEVELS)
     address = models.CharField(max_length=255, null=True)
-    role = models.ForeignKey(MemberRole, null=True,blank=True, on_delete=models.CASCADE)
+    role = models.ForeignKey(MemberRole, null=True, blank=True, on_delete=models.CASCADE)
     join_date = models.DateField()
     full_name = models.CharField(max_length=255, default=None)
     blood_group = models.CharField(max_length=50, choices=BLOOD_GROUPS)

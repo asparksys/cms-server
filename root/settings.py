@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "api",
     "club",
     "member",
+    "minute",
+    "notification",
     "ums",
 ]
 

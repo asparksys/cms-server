@@ -1,7 +1,6 @@
 from django.db import models
-from ums.models import User
 from club.models import BranchClub
-from member.models import Member
+from ums.models import User
 
 
 class BaseModel(models.Model):
@@ -13,10 +12,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Minute(BaseModel):
-    minute = models.TextField(blank=True, null=True, default=None)
-    agenda = models.TextField(default=None)
-    attendes = models.ManyToManyField(Member)
-
-    def __str__(self):
-        return self.date
+class Notification(BaseModel):
+    title = models.CharField(max_length=255, default=None)
+    message = models.TextField()
