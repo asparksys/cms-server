@@ -13,7 +13,7 @@ class BranchClub(models.Model):
     # general details
     active = models.BooleanField(default=True)
     name = models.CharField(max_length=255)
-    head = models.ForeignKey(HeadClub, on_delete=models.CASCADE)
+    head = models.ForeignKey(HeadClub, null=True,blank=True,on_delete=models.CASCADE)
     parent_club = models.CharField(max_length=255, blank=False, default=None)
     club_id = models.CharField(
         max_length=255, blank=True, default=None, null=True
