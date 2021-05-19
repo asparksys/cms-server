@@ -1,0 +1,1 @@
+[{"model": "ums.user", "pk": 7, "fields": {"password": "pbkdf2_sha256$216000$c4XSrQeKMC6L$/BWfki+vg/Eo/6+r37MT3bpAVsyERdvJuMX9fzBQ3BU=", "last_login": "2021-05-19T11:24:53.992Z", "full_name": "", "email": "info@asparksys.com", "phone": null, "address": null, "club_id": 3, "admin": true, "active": true, "user_image": "https://picsum.photos/200"}}]

@@ -1,29 +1,46 @@
+from datetime import datetime
 from django.db import models
 from ums.models import User
 from club.models import BranchClub
 
 
-class BaseModel:
-    date = models.DateField(auto_now_add=True)
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    club_id = models.ForeignKey(BranchClub, on_delete=models.CASCADE)
+class BaseModel(models.Model):
+    date = models.DateField(default=datetime.now)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    club_id = models.ForeignKey(BranchClub, on_delete=models.CASCADE, default=None)
+
+    class Meta:
+        abstract = True
 
 
-class MemberRole(BaseModel, models.Model):
+class MemberRole(BaseModel):
     name = models.CharField(max_length=255, blank=False, default=None)
+
+    def __str__(self):
+        return self.name
 
 
 class Member(BaseModel, models.Model):
-    BLOOD_GROUPS = [("unknown", "Unknown"), ("A+","A+"), ("A-", "A-"), ("B+", "B+"), ("B-","B-"), ("O+","O+"), ("O-", "O-"), ("AB+", "AB+"), ("AB-", "AB-")]
-    GENDERS = [('unknown',"Unknown"), ('male',"Male"), ('female',"Female")]
+    BLOOD_GROUPS = [
+        ("unknown", "Unknown"),
+        ("A+", "A+"),
+        ("A-", "A-"),
+        ("B+", "B+"),
+        ("B-", "B-"),
+        ("O+", "O+"),
+        ("O-", "O-"),
+        ("AB+", "AB+"),
+        ("AB-", "AB-"),
+    ]
+    GENDERS = [("unknown", "Unknown"), ("male", "Male"), ("female", "Female")]
     EDUCATION_LEVELS = [
-        ('see/slc',"SEE/SLC"),
-        ('+2',"+2"),
-        ('bachelors',"Bachelors"),
-        ('masters',"Masters"),
-        ('mphil',"MPhil"),
-        ('phd',"PhD"),
-        ('others',"Others"),
+        ("see/slc", "SEE/SLC"),
+        ("+2", "+2"),
+        ("bachelors", "Bachelors"),
+        ("masters", "Masters"),
+        ("mphil", "MPhil"),
+        ("phd", "PhD"),
+        ("others", "Others"),
     ]
 
     full_name = models.CharField(max_length=255)
@@ -34,9 +51,12 @@ class Member(BaseModel, models.Model):
     role = models.ForeignKey(MemberRole, on_delete=models.CASCADE)
     join_date = models.DateField()
     full_name = models.CharField(max_length=255, default=None)
-    blood_group = models.CharField(max_length=50,choices=BLOOD_GROUPS)
+    blood_group = models.CharField(max_length=50, choices=BLOOD_GROUPS)
     email = models.EmailField(max_length=255, default="info@asparksys.com")
     address = models.CharField(max_length=255, default=None)
     phone_number = models.CharField(max_length=255, default=None)
     immediate_contact_number = models.CharField(max_length=255, default=None)
     image = models.URLField(max_length=2048, default="https://picsum.photos/200")
+
+    def __str__(self):
+        return self.full_name
