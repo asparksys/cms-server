@@ -27,7 +27,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     phone = models.CharField(max_length=15, null=True)
     address = models.CharField(max_length=255, null=True)
-    club_id = models.ForeignKey(BranchClub, on_delete=models.CASCADE, default=3)
+    club_id = models.ForeignKey(BranchClub,blank=True,null=True, on_delete=models.CASCADE, default=None)
     admin = models.BooleanField(default=False)  # access django admin site
     active = models.BooleanField(default=True)
     user_image = models.URLField(
