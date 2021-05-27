@@ -6,5 +6,5 @@ from ..serializers.user import UserSerializer
 User = get_user_model()
 
 
-class UserTokemObtainView(TokenObtainPairView):
+class UserTokenObtainView(TokenObtainPairView):
     serializer_class = UserSerializer
